@@ -97,24 +97,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-if 'drf_yasg' in INSTALLED_APPS:
-    from drf_yasg.views import get_schema_view
-    from drf_yasg import openapi
-    from rest_framework.permissions import AllowAny
-
-    schema_view = get_schema_view(
-        openapi.Info(
-            title="Car API",
-            default_version='v1',
-            description="API documentation for the Car inventory app",
-            terms_of_service="https://www.google.com/policies/terms/",
-            contact=openapi.Contact(email="contact@carapi.local"),
-            license=openapi.License(name="MIT License"),
-        ),
-        public=True,  # Make the documentation publicly available
-        permission_classes=(AllowAny,),  # Explicitly allow access without token for Swagger
-    )
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),  # Shorter access token lifespan
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),  # Refresh token valid for 1 day
