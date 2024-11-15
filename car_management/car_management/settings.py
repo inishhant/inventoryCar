@@ -13,14 +13,33 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+import pymysql
+pymysql.install_as_MySQLdb()
+from dotenv import load_dotenv
+# Load environment variables from .env file
+load_dotenv()
+from django.conf import settings
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')  # Set this as an environment variable
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')  # Set this as an environment variable
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')  # Your S3 bucket name
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')  # The region of your S3 bucket
+
+# Media Files Configuration to use S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+MEDIA_URL = f'{os.getenv('AWS_S3_BASE_URL')}/'  # This will serve media files from S3
 
 
 # Quick-start development settings - unsuitable for production
@@ -109,16 +128,7 @@ SIMPLE_JWT = {
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-import pymysql
-pymysql.install_as_MySQLdb()
-# import environ
 
-# # Initialize environment variables
-# env = environ.Env()
-# environ.Env.read_env()  # Read .env file
-from dotenv import load_dotenv
-# Load environment variables from .env file
-load_dotenv()
 
 
 DATABASES = {
