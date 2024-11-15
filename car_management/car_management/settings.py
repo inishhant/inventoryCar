@@ -29,22 +29,6 @@ from django.conf import settings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# AWS S3 Configuration
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')  # Set this as an environment variable
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')  # Set this as an environment variable
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')  # Your S3 bucket name
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')  # The region of your S3 bucket
-
-# Media Files Configuration to use S3
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
-MEDIA_URL = f'{os.getenv('AWS_S3_BASE_URL')}/'  # This will serve media files from S3
-MEDIA_ROOT = BASE_DIR / 'media'
-DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
-
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -84,6 +68,19 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')  # Set this as an environment variable
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')  # Set this as an environment variable
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')  # Your S3 bucket name
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')  # The region of your S3 bucket
+
+# Media Files Configuration to use S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+MEDIA_URL = f'{os.getenv('AWS_S3_BASE_URL')}/'  # This will serve media files from S3
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10 MB
 
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",  # Example for local frontend
