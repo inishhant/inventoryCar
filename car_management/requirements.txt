@@ -17,13 +17,12 @@ filelock==3.16.1
 idna==3.10
 inflection==0.5.1
 jmespath==1.0.1
-mysqlclient==2.2.6
 packaging==24.2
 pillow==11.0.0
 pipreqs==0.4.13
 platformdirs==4.3.6
 PyJWT==2.9.0
-PyMySQL==1.1.1
+PyMySQL
 python-dateutil==2.9.0.post0
 python-decouple==3.8
 python-dotenv==1.0.1
