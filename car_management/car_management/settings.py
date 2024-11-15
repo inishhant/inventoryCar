@@ -62,10 +62,12 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Example for local frontend
-    "http://car-inventory-backend.vercel.app",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Example for local frontend
+#     "http://car-inventory-backend.vercel.app",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
 
 
 ROOT_URLCONF = "car_management.urls"
@@ -177,4 +179,4 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "static")
